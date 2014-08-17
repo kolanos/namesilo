@@ -3,13 +3,56 @@ import xml.etree.cElementTree as ElementTree
 import requests
 
 
+NAMESILO_OPERATIONS = {
+    'add_account_funds': 'addAccountFunds',
+    'add_auto_renew': 'addAutoRenewal',
+    'add_contact': 'contactAdd',
+    'add_dns_record': 'dnsAddRecord',
+    'add_email_forward': 'configureEmailForward',
+    'add_portfolio': 'portfolioAdd',
+    'add_privacy': 'addPrivacy',
+    'add_registered_nameserver': 'addRegisteredNameServer',
+    'associate_contact': 'contactDomainAssociate',
+    'associate_portfolio': 'portfolioDomainAssociate',
+    'change_nameservers': 'changeNameServers',
+    'check_register_availability': 'checkRegisterAvailability',
+    'check_transfer_availability': 'checkTransferAvailability',
+    'check_transfer_status': 'checkTransferStatus',
+    'delete_dns_record': 'dnsUpdateRecord',
+    'delete_portfolio': 'portfolioDelete',
+    'delete_registered_nameserver': 'deleteRegisteredNameServer',
+    'forward_domain': 'domainForward',
+    'get_account_balance': 'getAccountBalance',
+    'get_auth_code': 'retrieveAuthCode',
+    'get_domain_info': 'getDomainInfo',
+    'list_contacts': 'contactList',
+    'list_dns_records': 'dnsListRecords',
+    'list_domains': 'listDomains',
+    'list_email_forwards': 'listEmailForwards',
+    'list_portfolios': 'portfolioList',
+    'list_registered_nameservers': 'listRegisteredNameServers',
+    'lock_domain': 'domainLock',
+    'register_domain': 'registerDomain',
+    'remove_auto_renewal': 'removeAutoRenewal',
+    'remove_email_forward': 'deleteEmailForward',
+    'remove_privacy': 'removePrivacy',
+    'transfer_domain': 'ransferDomain',
+    'unlock_domain': 'domainUnlock',
+    'update_contact': 'contactUpdate',
+    'update_dns_record': 'dnsUpdateRecord',
+    'update_portfolio': 'portfoliopdate',
+    'update_registered_nameserver': 'modifyRegisteredNameServer',
+    'update_registered_nameserver': 'updateRegisteredNameServer'
+}
+
+
 class NameSiloError(Exception):
     pass
 
 
 class NameSilo(object):
     LIVE_BASE_URL = ' https://www.namesilo.com/api/'
-    SANDBOX_BASE_URL = 'https://sandbox.namesilo.com/api/'
+    SANDBOX_BASE_URL = 'http://sandbox.namesilo.com/api/'
 
     VERSION = '1'
     RESPONSE_TYPE = 'xml'
@@ -18,7 +61,15 @@ class NameSilo(object):
         self.api_key = api_key
         self.base_url = self.LIVE_BASE_URL if live else self.SANDBOX_BASE_URL
 
-    def handle_request(self, operation, **kwargs):
+    def __getattr__(self, name):
+        if name in NAMESILO_OPERATIONS:
+            def request_handler(**kwargs):
+                return self.request(name, **kwargs)
+            return request_handler
+        return super(NameSilo, self).__getattr__(name)
+
+    def request(self, operation, **kwargs):
+	operation = NAMESILO_OPERATIONS.get(operation, operation)
         kwargs.update(version=self.VERSION, type=self.RESPONSE_TYPE,
                       key=self.api_key)
         r = requests.get(self.base_url + operation, params=kwargs)
@@ -26,12 +77,6 @@ class NameSilo(object):
         root = ElementTree.XML(r.text)
         xmldict = XmlDictConfig(root)
         return xmldict.get('reply')
-
-    def register_domain(self, **kwargs):
-        return self.handle_request('registerDomain', **kwargs)
-
-    def list_domains(self):
-        return self.handle_request('listDomains')
 
 
 class XmlListConfig(list):

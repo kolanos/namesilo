@@ -48,7 +48,26 @@ NAMESILO_OPERATIONS = {
 
 
 class NameSiloError(Exception):
-    pass
+    """Base class for NameSilo errors."""
+
+
+class HTTPSNotUsed(NameSiloError):
+    """Raised if request is made without HTTPS."""
+
+
+class NoVersionSpecified(NameSiloError):
+    """Raised if no version is specified in the request."""
+
+
+class InvalidAPIVersion9NameSiloError):
+    """Raised if the ApI version specified is invalid."""
+
+
+NAMESILO_ERRORS = { 
+    '101': HTTPSNotUsed,
+    '102': NoVersionSpecified,
+    '103': InvalidAPIVersion,
+}
 
 
 class NameSilo(object):

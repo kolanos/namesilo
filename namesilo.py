@@ -33,6 +33,7 @@ NAMESILO_OPERATIONS = {
     'list_registered_nameservers': 'listRegisteredNameServers',
     'lock_domain': 'domainLock',
     'register_domain': 'registerDomain',
+    'renew_domain': 'renewDomain',
     'remove_auto_renewal': 'removeAutoRenewal',
     'remove_email_forward': 'deleteEmailForward',
     'remove_privacy': 'removePrivacy',
@@ -69,14 +70,29 @@ class NameSilo(object):
         return super(NameSilo, self).__getattr__(name)
 
     def request(self, operation, **kwargs):
-	operation = NAMESILO_OPERATIONS.get(operation, operation)
+        operation = NAMESILO_OPERATIONS.get(operation, operation)
         kwargs.update(version=self.VERSION, type=self.RESPONSE_TYPE,
                       key=self.api_key)
         r = requests.get(self.base_url + operation, params=kwargs)
         r.raise_for_status()
         root = ElementTree.XML(r.text)
-        xmldict = XmlDictConfig(root)
-        return xmldict.get('reply')
+        response = XmlDictConfig(root)
+        reply = response.get('reply')
+        reply = self.format_reply(reply)
+        return reply
+
+    def format_reply(self, reply):
+        for k, v in reply.iteritems():
+            if isinstance(v, dict):
+                reply[k] = self.format_reply(v)
+            elif not isinstance(v, list):
+                if v.lower() == 'yes':
+                    reply[k] = True
+                elif v.lower() == 'no':
+                    reply[k] = False
+                elif v.lower() == 'n/a':
+                    reply[k] = None
+        return reply
 
 
 class XmlListConfig(list):

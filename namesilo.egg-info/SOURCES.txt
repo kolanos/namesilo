@@ -1,0 +1,10 @@
+MANIFEST.in
+README.rst
+namesilo.py
+setup.cfg
+setup.py
+namesilo.egg-info/PKG-INFO
+namesilo.egg-info/SOURCES.txt
+namesilo.egg-info/dependency_links.txt
+namesilo.egg-info/requires.txt
+namesilo.egg-info/top_level.txt

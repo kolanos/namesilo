@@ -6,6 +6,7 @@ A simple wrapper for the NameSilo_ API.
 
 .. _NameSilo: http://www.namesilo.com
 
+--------
 Install
 -------
 
@@ -13,6 +14,7 @@ To install via pip:
 
     pip install namesilo
 
+--------
     Usage
     -----
 
@@ -30,6 +32,7 @@ From here youcan call operations like so:
 
     ns.register_domain(domain='yourdomain.com', years='1')
 
+----------
 Operations
 ----------
 

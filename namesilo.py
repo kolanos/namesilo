@@ -271,9 +271,9 @@ class NameSilo(object):
 
     def __getattr__(self, name):
         if name in NAMESILO_OPERATIONS:
-            def request_handler(**kwargs):
+            def handle_request(**kwargs):
                 return self.request(name, **kwargs)
-            return request_handler
+            return handle_request
         return super(NameSilo, self).__getattr__(name)
 
     def request(self, operation, **kwargs):
@@ -286,7 +286,14 @@ class NameSilo(object):
         response = XmlDictConfig(root)
         reply = response.get('reply')
         reply = self.format_reply(reply)
+        self.handle_error(reply)
         return reply
+
+    def handle_error(self, reply):
+        code = reply.get('code')
+        if code in NAMESILO_ERRORS:
+            error = NAMESILO_ERRORS[code]
+            raise error(reply.get('detail'))
 
     def format_reply(self, reply):
         for k, v in reply.iteritems():

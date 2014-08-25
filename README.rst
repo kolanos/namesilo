@@ -2,9 +2,9 @@
 NameSilo
 ========
 
-A simple wrapper for the `NameSilo API_.
+A simple wrapper for the API_.
 
-.. _NameSilo API: https://www.namesilo.com/api_reference.php
+.. _API: https://www.namesilo.com/api_reference.php
 
 Install
 --------

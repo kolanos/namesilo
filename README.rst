@@ -2,21 +2,19 @@
 NameSilo
 ========
 
-A simple wrapper for the NameSilo_ API.
+A simple wrapper for the `NameSilo API_.
 
-.. _NameSilo: http://www.namesilo.com
+.. _NameSilo API: https://www.namesilo.com/api_reference.php
 
---------
 Install
--------
+--------
 
 To install via pip:
 
     pip install namesilo
 
---------
-    Usage
-    -----
+Usage
+------
 
 Instantiating the client:
 
@@ -32,7 +30,6 @@ From here you can call operations like so:
 
     ns.register_domain(domain='yourdomain.com', years='1')
 
----------
 Operations
 ----------
 

@@ -34,6 +34,6 @@ Operations
 ----------
 
 This client renames the operations to follow a more consistent convention of
-(verb)_(subject). See **namesilo.NAMESILO_OPERATIONS** to seehow these method
+(verb)_(subject). See *namesilo.NAMESILO_OPERATIONS* to seehow these method
 names map to their NameSilo counterparts. The goal of this mapping its to make
 the API more intuitive.

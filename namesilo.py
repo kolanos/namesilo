@@ -259,7 +259,7 @@ NAMESILO_ERRORS = {
 
 
 class NameSilo(object):
-    LIVE_BASE_URL = ' https://www.namesilo.com/api/'
+    LIVE_BASE_URL = 'https://www.namesilo.com/api/'
     SANDBOX_BASE_URL = 'http://sandbox.namesilo.com/api/'
 
     VERSION = '1'

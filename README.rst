@@ -23,7 +23,7 @@ Instantiating the client:
     # By default the client initializes in sandbox mode
     ns = namesilo.NameSilo('API KEY HERE')
 
-    # Instantitate in live mode
+    # Instantiate in live mode
     ns = namesilo.NameSilo('API KEY HERE', live=True)
 
 From here you can call operations like so:

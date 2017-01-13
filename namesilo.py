@@ -359,7 +359,11 @@ class XmlDictConfig(dict):
                 # if the tag has attributes, add those to the dict
                 if element.items():
                     aDict.update(dict(element.items()))
-                self.update({element.tag: aDict})
+                if element.tag in self:
+                    temporary = self[element.tag]
+                    self[element.tag] = [temporary, aDict]
+                else:
+                    self.update({element.tag: aDict})
             # this assumes that if you've got an attribute in a tag,
             # you won't be having any text. This may or may not be a
             # good idea -- time will tell. It works for the way we are

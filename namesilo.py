@@ -296,7 +296,7 @@ class NameSilo(object):
             raise error(reply.get('detail'))
 
     def format_reply(self, reply):
-        for k, v in reply.iteritems():
+        for k, v in reply.items():
             if isinstance(v, dict):
                 reply[k] = self.format_reply(v)
             elif not isinstance(v, list):

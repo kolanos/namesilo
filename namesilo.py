@@ -216,7 +216,7 @@ class DNSModificationErrror(NameSiloError):
     pass
 
 
-NAMESILO_ERRORS = { 
+NAMESILO_ERRORS = {
     '101': HTTPSNotUsed,
     '102': NoVersionSpecified,
     '103': InvalidAPIVersion,

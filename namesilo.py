@@ -18,7 +18,7 @@ NAMESILO_OPERATIONS = {
     'check_register_availability': 'checkRegisterAvailability',
     'check_transfer_availability': 'checkTransferAvailability',
     'check_transfer_status': 'checkTransferStatus',
-    'delete_dns_record': 'dnsUpdateRecord',
+    'delete_dns_record': 'dnsDeleteRecord',
     'delete_portfolio': 'portfolioDelete',
     'delete_registered_nameserver': 'deleteRegisteredNameServer',
     'forward_domain': 'domainForward',

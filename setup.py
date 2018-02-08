@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name='namesilo',
-    version='0.1.4',
+    version='0.1.5',
     url='http://github.com/kolanos/namesilo',
     license='MIT',
     author='Michael Lavers',

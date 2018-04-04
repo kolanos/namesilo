@@ -211,7 +211,7 @@ class InvalidDomainName(NameSiloError):
     pass
 
 
-class DNSModificationErrror(NameSiloError):
+class DNSModificationError(NameSiloError):
     pass
 
 
@@ -253,7 +253,7 @@ NAMESILO_ERRORS = {
     '265': DomainTransferError,
     '266': DomainTransferDoesNotExist,
     '267': InvalidDomainName,
-    '280': DNSModificationErrror,
+    '280': DNSModificationError,
 }
 
 

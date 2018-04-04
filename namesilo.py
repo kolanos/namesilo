@@ -42,8 +42,7 @@ NAMESILO_OPERATIONS = {
     'update_contact': 'contactUpdate',
     'update_dns_record': 'dnsUpdateRecord',
     'update_portfolio': 'portfoliopdate',
-    'update_registered_nameserver': 'modifyRegisteredNameServer',
-    'update_registered_nameserver': 'updateRegisteredNameServer'
+    'update_registered_nameserver': 'modifyRegisteredNameServer'
 }
 
 
